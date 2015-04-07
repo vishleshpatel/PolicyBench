@@ -6,23 +6,28 @@ import random
 class Subnet:
 
     ''''
+    2 Methods in Class Subnet:
     totalHosts : total no. of end points in entire network
-
-    sizeOfSubnets : total no. of hosts in 1 subnet
-    allowed subnet size - 14,30,64,128,256,512,1024,2048 ==> 2^n - 2
+    1.  createEqualSubnets: creates all subnets having equal no. of hosts
+        hostsPerSubnets :  no. of hosts in 1 subnet
+        allowed no. of hosts - 14,30,62,126,254 ==> 2^n - 2
     '''''
 
 
     def createEqualSubnets(self, totalHosts, hostsPerSubnet):
 
-        numberOfSubnets = int(totalHosts / hostsPerSubnet) +1
-        subnetHostMask = (int(math.log2(hostsPerSubnet))+1)
+        if(hostsPerSubnet != (14 or 30 or 62 or 126 or 254)):
 
-        networkIP = ipaddress.IPv4Network('10.0.0.0/15')
-        subnetsList = self.getList(networkIP,subnetHostMask)
+            numberOfSubnets = int(totalHosts / hostsPerSubnet) +1
+            subnetHostMask = (int(math.log2(hostsPerSubnet))+1)
+
+            networkIP = ipaddress.IPv4Network('10.0.0.0/15')
+            subnetsList = self.getList(networkIP,subnetHostMask)
 
         return list(subnetsList[0:numberOfSubnets])
 
+    # creates list of subnets
+    # subnetHostMask : host mask of the subnet
     def getList(self,networkAddr, subnetHostMask):
         return list(networkAddr.subnets(prefixlen_diff=17-subnetHostMask))
 
@@ -34,20 +39,20 @@ class Subnet:
         subnetsList = []
 
 
-        list.append( self.getList(networkIP,4))   #list of all subnets , each subnet contains 14 end hosts
-        list.append(self.getList(networkIP,5))     #32
-        list.append(self.getList(networkIP,6))    #64
-        list.append(self.getList(networkIP,7))  #128
-        list.append(self.getList(networkIP,8))  #256
+        list.append( self.getList(networkIP,4))   #list of possible subnets , each subnet contains 14 end hosts
+        list.append(self.getList(networkIP,5))    #subnets with 30 end hosts
+        list.append(self.getList(networkIP,6))    #62
+        list.append(self.getList(networkIP,7))  #126
+        list.append(self.getList(networkIP,8))  #254
 
         combination = self.getRandomCombination(totalHosts)
-        combination = sorted(combination.items(),reverse=1)
-        combination = dict(combination)
-        print(combination,"should be sorted")
-        list_combination = combination.items()
+        #print(combination)
+        combination = sorted(combination.items())
+        #print(combination,"should be sorted")
+
         list_keys = []
         list_values = []
-        for (x,y) in list_combination:
+        for (x,y) in combination:
             list_keys.append(x)
             list_values.append(y)
         next_start = []
@@ -73,10 +78,10 @@ class Subnet:
 
             elif(list_keys[i] ==30):
                 if(i==0):
-                    temp = 0
+                    start = 0
                 else:
-                    temp = int(next_start.pop())
-                subnetsList.extend(list[1][temp:temp+list_values[i]])
+                    start = int(next_start.pop())
+                subnetsList.extend(list[1][start:start+list_values[i]])
                 if((i+1) < len(list_keys)):
                     if(list_keys[i+1]==62):
                          if(i==1):
@@ -98,10 +103,10 @@ class Subnet:
 
             elif(list_keys[i] ==62):
                 if(i==0):
-                    temp = 0
+                    start = 0
                 else:
-                    temp = int(next_start.pop())
-                subnetsList.extend(list[2][temp:temp+list_values[i]])
+                    start = int(next_start.pop())
+                subnetsList.extend(list[2][start:start+list_values[i]])
                 if((i+1) < len(list_keys)):
                     if(list_keys[i+1]==126):
                         if(i==2):  #14,30,62,126,...
@@ -121,10 +126,10 @@ class Subnet:
 
             elif(list_keys[i]==126):
                 if(i==0):
-                    temp = 0
+                    start = 0
                 else:
-                    temp = int(next_start.pop())
-                subnetsList.extend(list[3][int(temp):int(temp)+list_values[i]])
+                    start = int(next_start.pop())
+                subnetsList.extend(list[3][int(start):int(start)+list_values[i]])
                 if((i+1) < len(list_keys)):
                     if(list_keys[i+1]==254):
                         if(i==3):  #14,30,62,126,256,...
@@ -155,13 +160,15 @@ class Subnet:
 
             else:
                 if(i==0):
-                    temp = 0
+                    start = 0
                 else:
-                    temp = int(next_start.pop())
-                subnetsList.extend(list[4][int(temp):int(temp)+list_values[i]])
+                    start = int(next_start.pop())
+                subnetsList.extend(list[4][int(start):int(start)+list_values[i]])
 
         return subnetsList
 
+    # input: total no. of end hosts in network
+    # output : random combination of subnets
     def getRandomCombination(self,totalHost):
          # select every combinations randomly
         list = [14,30,62,126,254]
@@ -207,18 +214,6 @@ class Subnet:
                         combinations[list[index-1]]=number
 
         return combinations
-
-
-
-
-
-
-
-
-
-
-
-
 
 s = Subnet()
 list = s.createSubnets(1006)
