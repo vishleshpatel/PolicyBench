@@ -1,29 +1,31 @@
-__author__ = 'Vishlesh.Patel'
+__author__ = 'vishlesh'
+
+from enum import Enum
 import ipaddress
-import random
-import math
+
 class test:
-    print("this is the test for pycharm integration with github repository")
-    list = [14,30,62,126,254,510,1020,2046]
-    sublist =list[0:3]
-    print(sublist)
+    ipnet = ipaddress.ip_network('10.0.0.0/29')
 
-    combinations = dict([(1,2), (15,3), (2,4)])
+    def getlist(self,ipnet):
+        list = []
+        for addr in ipnet:
+            list.append(addr)
 
-    print(combinations)
-    combinations =sorted(combinations.items())
-    list = list(combinations.k)
-    print(combinations,"sorted")
+        list.pop()
+        list.pop(0)
+        return list
 
 
-    for i in range(0,len(list),1):
-        print(i,"fefsd")
-    sublist = list[0:2]
-    print(sublist)
+class action(Enum):
+    forward = 1
+    drop =2
 
-    random1 = random.random()
-    print(random1)
+a= action(1)
+list =str(a).split('.')
+print( str(list[1]))
+print(str(a).split('.'))
 
-    list = [14,30,62,126,254,510,1020,2046]
-    print(list[3],"herererer")
-    k = int(random.uniform(0,2.9)) +1
+t =test()
+list=t.getlist(ipaddress.IPv4Network('10.0.0.0/29'))
+print(list)
+print(len(list))

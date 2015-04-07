@@ -8,7 +8,6 @@ class DestInfo:
     def __init__(self):
         totalPercentageCovered =0
 
-
     """
     AP = Access Point
     access points are routers
