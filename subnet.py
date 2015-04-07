@@ -3,6 +3,9 @@ __author__ = 'Vishlesh.Patel'
 import ipaddress
 import math
 import random
+
+
+
 class Subnet:
 
     ''''
@@ -48,7 +51,7 @@ class Subnet:
         combination = self.getRandomCombination(totalHosts)
         #print(combination)
         combination = sorted(combination.items())
-        #print(combination,"should be sorted")
+        print(combination,"should be sorted")
 
         list_keys = []
         list_values = []
@@ -189,20 +192,20 @@ class Subnet:
                     break;
 
             if(random1>=0.5 and random2<0.5):
-                number = int(totalHost/sublist[0]) +1
+                number = int(math.ceil(totalHost/sublist[0]))
                 combinations=dict([(sublist[0],number)])
             elif(random1<0.5 and random2 >=0.5):
-                number = int(totalHost/sublist[1]) +1
+                number = int(math.ceil(totalHost/sublist[1]))
                 combinations = dict([(sublist[1],number)])
             else:
                 temp = totalHost - sublist[1]
-                number = int(totalHost / sublist[0]) +1
+                number = int(math.ceil(totalHost/sublist[0]))
                 combinations = dict([ (sublist[0],1) , (sublist[1],number) ])
 
         else:       #(totalHost>62 and totalHost <=2046):
 
             for index in range(5,0,-1):
-                max_possible = int(totalHost/list[index-1]) +1
+                max_possible = int(math.ceil(totalHost/list[index-1]))
 
                 if index==1:
                     combinations[list[index-1]]  = max_possible
