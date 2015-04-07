@@ -219,7 +219,7 @@ class Subnet:
         return combinations
 
 s = Subnet()
-list = s.createSubnets(1006)
+list = s.createSubnets(100000)
 
 print(len(list))
 print(list)

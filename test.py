@@ -4,10 +4,9 @@ import random
 import math
 class test:
     print("this is the test for pycharm integration with github repository")
-    list =[]
-    list.append(3)
-    print(len(list))
-    print(list[0],"ds")
+    list = [14,30,62,126,254,510,1020,2046]
+    sublist =list[0:3]
+    print(sublist)
 
     combinations = dict([(1,2), (15,3), (2,4)])
 
@@ -16,7 +15,7 @@ class test:
     list = list(combinations.k)
     print(combinations,"sorted")
 
-    list = [14,30,62,126,254,510,1020,2046]
+
     for i in range(0,len(list),1):
         print(i,"fefsd")
     sublist = list[0:2]
