@@ -26,8 +26,9 @@ class Subnet:
 
             networkIP = ipaddress.IPv4Network('10.0.0.0/15')
             subnetsList = self.getList(networkIP,subnetHostMask)
-
-        return list(subnetsList[0:numberOfSubnets])
+            return list(subnetsList[0:numberOfSubnets])
+        else:
+            print("syntax: createEqualSubnets( totalHosts<262144, hostsPerSubnet = 14,30,62,126 or 254")
 
     # creates list of subnets
     # subnetHostMask : host mask of the subnet
@@ -36,6 +37,9 @@ class Subnet:
 
 
     def createSubnets(self, totalHosts):
+        if(totalHosts>262144):
+            print("error: maximum total hosts allowed : 262144")
+            return None
 
         networkIP = ipaddress.IPv4Network('10.0.0.0/15')
         list = []   # list of subnets - list of different sizes
@@ -218,8 +222,10 @@ class Subnet:
 
         return combinations
 
+"""
 s = Subnet()
-list = s.createSubnets(100000)
+list = s.createSubnets(300000)
 
 print(len(list))
 print(list)
+"""

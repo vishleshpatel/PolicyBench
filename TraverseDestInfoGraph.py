@@ -6,24 +6,25 @@ from enum import Enum
 
 class DestInfo:
     def __init__(self):
-        totalPercentageCovered =0
+        self.percentageCovered =0
 
     """
     AP = Access Point
     access points are routers
-
     """
+
+
     def traverseDestInfoGraph(self,destInfoGraph,totalPolicies,subnetsList):
 
-        accessPoints=self.createAccesspoints(subnetsList)
+        accessPoints=self.createAccessPoints(subnetsList)
         totalAccessPoints = len(accessPoints)
-        PolicyUnits = []
+        list_PolicyUnits = []
         for (x,y) in destInfoGraph:
-            numberPoliciesToCreate = self.getNumber(x,totalPolicies)
+            numberPoliciesToCreate = self.getNumber_policy(x,totalPolicies)
             number_spannedAPs = self.getSpannedDeviceNumber(y,totalAccessPoints)
-            PolicyUnits.extend( self.cretePolicyUnits(numberPoliciesToCreate,number_spannedAPs,accessPoints))
+            list_PolicyUnits.extend( self.createPolicyUnits(numberPoliciesToCreate,number_spannedAPs,accessPoints))
 
-        return PolicyUnits
+        return list_PolicyUnits
 
     def createPolicyUnits(self,numberPolicies,number_spannedAPs,accessPoints):
         policyUnits = []
@@ -38,11 +39,11 @@ class DestInfo:
 
         return policyUnits
 
-    def getNumber(self,percentageX,totalPolicies):
+    def getNumber_policy(self,percentageX,totalPolicies):
 
-        percentageX = percentageX - self.totalPercentageCovered
-        number = int(math.ceil((percentageX/100)*totalPolicies))
-        self.totaPercentageCovered =self.totalPercentageCovered + percentageX
+        percentageX = percentageX - self.percentageCovered
+        number = int((percentageX/100)*totalPolicies)
+        self.totaPercentageCovered =self.percentageCovered + percentageX
         return number
 
     def getSpannedDeviceNumber(self,percentageY,totalAccessPoints):
@@ -53,7 +54,7 @@ class DestInfo:
 
         totalSubnets = len(subnetsList)
         totalAccessPoints = random.randint(15,20)
-        subnetsPerAP = totalSubnets/totalAccessPoints
+        subnetsPerAP = int(math.ceil(totalSubnets/totalAccessPoints))
 
         accessPoints = []
         start = 0
