@@ -9,11 +9,16 @@ import random
 class Subnet:
 
     ''''
-    2 Methods in Class Subnet:
-    totalHosts : total no. of end points in entire network
+    2 Methods in Class Subnet: createEqualSubnets, createSubnets
+
     1.  createEqualSubnets: creates all subnets having equal no. of hosts
-        hostsPerSubnets :  no. of hosts in 1 subnet
-        allowed no. of hosts - 14,30,62,126,254 ==> 2^n - 2
+        :argument1 hostsPerSubnets :  no. of hosts in 1 subnet-allowed values - 14,30,62,126,254 ==> 2^n - 2
+        :argument2 totalHosts : total no. of end points in entire network
+        :return list of subnets having equal no. of hosts in it
+
+    2. createSubnets: creates subnets having unequal no. of hosts
+        :argument  totalHosts : total no. of end points in entire network
+        :return list of subnets having unequal no. of hosts in it
     '''''
 
 
@@ -55,7 +60,7 @@ class Subnet:
         combination = self.getRandomCombination(totalHosts)
         #print(combination)
         combination = sorted(combination.items())
-        print(combination,"should be sorted")
+        print(" here is the combinations in a shorted manner:",combination)
 
         list_keys = []
         list_values = []
@@ -222,10 +227,3 @@ class Subnet:
 
         return combinations
 
-"""
-s = Subnet()
-list = s.createSubnets(300000)
-
-print(len(list))
-print(list)
-"""

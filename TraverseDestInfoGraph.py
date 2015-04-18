@@ -2,49 +2,60 @@ __author__ = 'vishlesh'
 
 import random
 import math
-from enum import Enum
+from Policy import *
+from SDN_RuleSetGenerator.Action import *
 
 class DestInfo:
     def __init__(self):
         self.percentageCovered =0
 
     """
+    Method: traverseDestInfoGraph
+
+    Inputs:
+    :arg1 destInfoGraph - list of points in DestInfo graph
+    :arg2 totalPolicyUnits - total no. of policy units
+    :arg3 subnetsList - list of subnets in the network
+    subnetsList can be obtained by createSubnets and createEqualSubnets methods
+
+    :returns list_PolicyUnits : list of policy units
+
     AP = Access Point
     access points are routers
     """
-
-
-    def traverseDestInfoGraph(self,destInfoGraph,totalPolicies,subnetsList):
+    def traverseDestInfoGraph(self,destInfoGraph,totalPolicyUnits,subnetsList):
 
         accessPoints=self.createAccessPoints(subnetsList)
         totalAccessPoints = len(accessPoints)
         list_PolicyUnits = []
         for (x,y) in destInfoGraph:
-            numberPoliciesToCreate = self.getNumber_policy(x,totalPolicies)
-            number_spannedAPs = self.getSpannedDeviceNumber(y,totalAccessPoints)
+            #print((x,y))
+            numberPoliciesToCreate = self.getNumber_policy(y,totalPolicyUnits)
+           # print(numberPoliciesToCreate," PolicyUnits will be created")
+            number_spannedAPs = self.getSpannedDeviceNumber(x,totalAccessPoints)
             list_PolicyUnits.extend( self.createPolicyUnits(numberPoliciesToCreate,number_spannedAPs,accessPoints))
-
         return list_PolicyUnits
+
+    def getNumber_policy(self,percentageX,totalPolicyUnits):
+        # print(self.percentageCovered,"percentage covered")
+        percentageX = percentageX - self.percentageCovered
+        number = int(math.ceil((percentageX/100)*totalPolicyUnits))
+        self.percentageCovered =self.percentageCovered + percentageX
+        return number
+
 
     def createPolicyUnits(self,numberPolicies,number_spannedAPs,accessPoints):
         policyUnits = []
-
+        # from DestGraph, we can just set Destinations and actions for Policy Units
         for index in range(0,numberPolicies,1):
             accessPoints_Policy = random.sample(accessPoints,number_spannedAPs)
-            p = policy()
+            p = Policy()
             p.setDestAccessPoints(accessPoints_Policy)
-            a = action(1)
+            a = Action(1)   # action type: forward
             p.setAction(a)
             policyUnits.append(p)
 
         return policyUnits
-
-    def getNumber_policy(self,percentageX,totalPolicies):
-
-        percentageX = percentageX - self.percentageCovered
-        number = int((percentageX/100)*totalPolicies)
-        self.totaPercentageCovered =self.percentageCovered + percentageX
-        return number
 
     def getSpannedDeviceNumber(self,percentageY,totalAccessPoints):
         number = int(math.ceil((percentageY/100)*totalAccessPoints))
@@ -63,24 +74,3 @@ class DestInfo:
             start = start + subnetsPerAP
         return accessPoints
 
-
-
-class policy:
-    def __init__(self):
-        destinationAccessPoints = None
-        source = None
-        action = None
-
-    def setDestAccessPoints(self,listDestAP):
-        self.destinationAccessPoints = listDestAP
-
-    def setAction(self,action):
-        self.action = action
-
-    def setSource(self,source):
-        self.source = source
-
-
-class action(Enum):
-    forward = 1
-    drop =2
