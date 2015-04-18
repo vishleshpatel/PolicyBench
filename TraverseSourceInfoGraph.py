@@ -4,13 +4,13 @@ from SDN_RuleSetGenerator.TraverseDestInfoGraph import *
 from SDN_RuleSetGenerator.Policy import *
 import ipaddress
 
+
 class SourceInfo:
 
     def __init__(self):
         self.policyPercentageCovered = 0
         self.hostPercentegeCovered=0
-        self.setEndHosts =0
-        self.endHostsList = []
+        self.endHostsSet= set([])
         self.policies=[]
 
     def getAllEndHosts(self,subnetsList):
@@ -22,11 +22,13 @@ class SourceInfo:
         output: all host addresses available in the enterprise network
         """
         EndHostsList = []
-
         for each_subnet_addr in subnetsList:
-            EndHostsList.append(self.getHosts(each_subnet_addr))
+            list =self.getHosts(each_subnet_addr)
+            for each_host in list:
+                EndHostsList.append(each_host)
 
-        return EndHostsList
+        print(len(EndHostsList),"total endhosts in enterprise")
+        return set(EndHostsList)
 
 
     def getHosts(self,networkAddr):
@@ -53,19 +55,22 @@ class SourceInfo:
         """
         assert isinstance(list_PolicyUnits, list)
         totalPolicies = len(list_PolicyUnits)
-        self.endHostsList = self.getAllEndHosts(subnetsList)
-        totalNumEndHosts = len(self.endHostsList)
+        self.endHostsSet = self.getAllEndHosts(subnetsList)
 
         for (x,y) in sourceInfoGraph:
+            totalNumEndHosts = len(self.endHostsSet)
+            print(totalNumEndHosts,"lets check")
             numPolicyUnit = self.getNumber_policy(y,totalPolicies)
             numEndHostsToAssign= self.getNumber_endhost(x,totalNumEndHosts)
             endHostsPerPolicyUnit = int(numEndHostsToAssign/numPolicyUnit)
+            print(numPolicyUnit,"no. of policy units", numEndHostsToAssign,"no. of end hosts",
+                  endHostsPerPolicyUnit,"end hosts per policy unit")
             print((x,y))
             for i in range(0,numPolicyUnit,1):
                  if(i==numPolicyUnit-1): #last iteration
                     endHostsPerPolicyUnit = numEndHostsToAssign #assign remaining endHosts
-                 endHostsList_Source =self.getRandomEndhosts(endHostsPerPolicyUnit)
-                 self.setSource(list_PolicyUnits[i],endHostsList_Source)
+                 sourceAddressesList =self.getRandomEndhosts(endHostsPerPolicyUnit)
+                 self.setSource(list_PolicyUnits[i],sourceAddressesList)
                  numEndHostsToAssign = numEndHostsToAssign - endHostsPerPolicyUnit
                     #endHosts_toAssign = random.sample(endHosts,endHostsPerPolicyUnit)
                     #Remember: source are the intersection, dest are unions
@@ -75,26 +80,23 @@ class SourceInfo:
         return self.policies
 
     def getRandomEndhosts(self,endHostsPerPolicyUnit):
-
-        randomEndhosts =[]
-        for i in range(0,endHostsPerPolicyUnit,1):
-            number = len(self.endHostsList)
-            if(number==1):
-                endHost=self.endHostsList[0]
-                randomEndhosts.append(endHost)
-                self.endHostsList.remove(endHost)
-                return randomEndhosts
-            else:
-                num = random.randint(1,number-1)
-                endHost = self.endHostsList[num]
-                randomEndhosts.append(endHost)
-                self.endHostsList.remove(endHost)
+        # based on the random.sample method
+        print("in getRandomEndhosts")
+        print("set of",endHostsPerPolicyUnit,"should be created")
+        print(len(self.endHostsSet),"total end hosts")
+        randomEndhostsSet =set([])
+        randomEndhosts = set(random.sample(self.endHostsSet,endHostsPerPolicyUnit))
+        print("got the sample, sample size:",len(randomEndhosts), "random end hosts")
+        self.endHostsSet = self.endHostsSet - randomEndhosts
+        print(len(self.endHostsSet), "new substracted size of self.endHostsSet")
         return randomEndhosts
+
 
     def setSource(self,policyUnit,endHosts_toAssign):
        # assert isinstance(policyUnit,Policy)
         for each_endHost in endHosts_toAssign:
             p=Policy()
+
             p.setSource(each_endHost)
             p.setAction(policyUnit.getAction())
             p.setDestAccessPoints(policyUnit.getDestAccessPoints())
