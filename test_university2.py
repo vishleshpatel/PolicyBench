@@ -5,9 +5,9 @@ from SDN_RuleSetGenerator.TraverseDestInfoGraph import *
 from SDN_RuleSetGenerator.TraverseSourceInfoGraph import *
 from SDN_RuleSetGenerator.Policy import *
 
-
+# usage enter No. of hosts in the network should be given to s.createSubnets(number of End host)
 s = Subnet()
-subnetList = s.createSubnets(100000)
+subnetList = s.createSubnets(50000)
 print(subnetList)
 print("total no. of subnets created:",len(subnetList))
 

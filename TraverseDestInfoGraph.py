@@ -24,22 +24,29 @@ class DestInfo:
     access points are routers
     """
     def traverseDestInfoGraph(self,destInfoGraph,totalPolicyUnits,subnetsList):
-
+        allocatedPolicyUnits=0
         accessPoints=self.createAccessPoints(subnetsList)
         totalAccessPoints = len(accessPoints)
         list_PolicyUnits = []
         for (x,y) in destInfoGraph:
-            #print((x,y))
             numberPoliciesToCreate = self.getNumber_policy(y,totalPolicyUnits)
-           # print(numberPoliciesToCreate," PolicyUnits will be created")
+            if((x,y)==destInfoGraph[len(destInfoGraph)-1]):
+                numberPoliciesToCreate=totalPolicyUnits - allocatedPolicyUnits
             number_spannedAPs = self.getSpannedDeviceNumber(x,totalAccessPoints)
-            list_PolicyUnits.extend( self.createPolicyUnits(numberPoliciesToCreate,number_spannedAPs,accessPoints))
+            if numberPoliciesToCreate==0:
+                continue
+            list_PolicyUnits.extend(self.createPolicyUnits(numberPoliciesToCreate,number_spannedAPs,accessPoints))
+            allocatedPolicyUnits = allocatedPolicyUnits + numberPoliciesToCreate
         return list_PolicyUnits
 
     def getNumber_policy(self,percentageX,totalPolicyUnits):
         # print(self.percentageCovered,"percentage covered")
         percentageX = percentageX - self.percentageCovered
-        number = int(math.ceil((percentageX/100)*totalPolicyUnits))
+        number =(percentageX/100)*totalPolicyUnits
+        if(number<1):
+            return 0
+        else:
+            number = int(number)
         self.percentageCovered =self.percentageCovered + percentageX
         return number
 

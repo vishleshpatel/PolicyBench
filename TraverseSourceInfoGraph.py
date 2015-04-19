@@ -59,11 +59,11 @@ class SourceInfo:
 
         for (x,y) in sourceInfoGraph:
             totalNumEndHosts = len(self.endHostsSet)
-            print(totalNumEndHosts,"lets check")
             numPolicyUnit = self.getNumber_policy(y,totalPolicies)
             numEndHostsToAssign= self.getNumber_endhost(x,totalNumEndHosts)
             endHostsPerPolicyUnit = int(numEndHostsToAssign/numPolicyUnit)
-            print(numPolicyUnit,"no. of policy units", numEndHostsToAssign,"no. of end hosts",
+            print(numPolicyUnit,"no. of policy will be created in this iteration,",
+                  numEndHostsToAssign,"no. of end hosts,",
                   endHostsPerPolicyUnit,"end hosts per policy unit")
             print((x,y))
             for i in range(0,numPolicyUnit,1):
@@ -72,23 +72,18 @@ class SourceInfo:
                  sourceAddressesList =self.getRandomEndhosts(endHostsPerPolicyUnit)
                  self.setSource(list_PolicyUnits[i],sourceAddressesList)
                  numEndHostsToAssign = numEndHostsToAssign - endHostsPerPolicyUnit
-                    #endHosts_toAssign = random.sample(endHosts,endHostsPerPolicyUnit)
-                    #Remember: source are the intersection, dest are unions
-                    #endHosts = self.substract(endHosts,endHosts_toAssign)
-
-
         return self.policies
 
     def getRandomEndhosts(self,endHostsPerPolicyUnit):
         # based on the random.sample method
-        print("in getRandomEndhosts")
-        print("set of",endHostsPerPolicyUnit,"should be created")
-        print(len(self.endHostsSet),"total end hosts")
+
+       # print("set of",endHostsPerPolicyUnit,"should be created")
+        #print(len(self.endHostsSet),"total end hosts")
         randomEndhostsSet =set([])
         randomEndhosts = set(random.sample(self.endHostsSet,endHostsPerPolicyUnit))
-        print("got the sample, sample size:",len(randomEndhosts), "random end hosts")
+       # print("got the sample, sample size:",len(randomEndhosts), "random end hosts")
         self.endHostsSet = self.endHostsSet - randomEndhosts
-        print(len(self.endHostsSet), "new substracted size of self.endHostsSet")
+      #  print(len(self.endHostsSet), "new substracted size of endHostsSet")
         return randomEndhosts
 
 
