@@ -17,11 +17,12 @@ totalPolicies = 2
 destinationInfoObj = DestInfo()
 sourceInfoObj = SourceInfo()
 list_PolicyUnits = destinationInfoObj.traverseDestInfoGraph(destinationGraph,totalPolicies,subnetList)
-
+print(len(list_PolicyUnits),"total policy units")
 policies = []
 sourceGraph = [(17,50),(100,100)]
+
 policies=sourceInfoObj.traverseSourceInfoGraph(sourceGraph,list_PolicyUnits,subnetList)
-print(len(list_PolicyUnits),"total policy units")
+
 for each_policy in list_PolicyUnits:
     print(each_policy.getDestAccessPoints())
     print(each_policy.getAction())

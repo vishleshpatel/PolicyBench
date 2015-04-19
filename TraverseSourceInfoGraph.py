@@ -54,36 +54,45 @@ class SourceInfo:
         :return: Method sets source addresses in the policy unit
         """
         assert isinstance(list_PolicyUnits, list)
-        totalPolicies = len(list_PolicyUnits)
+        totalPolicyUnits = len(list_PolicyUnits)
         self.endHostsSet = self.getAllEndHosts(subnetsList)
 
         for (x,y) in sourceInfoGraph:
             totalNumEndHosts = len(self.endHostsSet)
-            numPolicyUnit = self.getNumber_policy(y,totalPolicies)
+            numPolicyUnit = self.getNumber_policy(y,totalPolicyUnits)
             numEndHostsToAssign= self.getNumber_endhost(x,totalNumEndHosts)
             endHostsPerPolicyUnit = int(numEndHostsToAssign/numPolicyUnit)
-            print(numPolicyUnit,"no. of policy will be created in this iteration,",
-                  numEndHostsToAssign,"no. of end hosts,",
-                  endHostsPerPolicyUnit,"end hosts per policy unit")
-            print((x,y))
+            #print(numPolicyUnit,"no. of policy will be created in this iteration,",
+             #     numEndHostsToAssign,"no. of end hosts,",
+              #    endHostsPerPolicyUnit,"end hosts per policy unit")
+
+            if(((x,y)==sourceInfoGraph[len(sourceInfoGraph)-1]) or numPolicyUnit>=len(list_PolicyUnits)):
+                 numPolicyUnit=len(list_PolicyUnits)
+                 for i in range(0,numPolicyUnit,1):
+                     if(i==numPolicyUnit-1): #last iteration
+                        endHostsPerPolicyUnit = numEndHostsToAssign #assign remaining endHosts
+                     sourceAddressesList =self.getRandomEndhosts(endHostsPerPolicyUnit)
+                     self.setSource(list_PolicyUnits[i],sourceAddressesList)
+                     numEndHostsToAssign = numEndHostsToAssign - endHostsPerPolicyUnit
+                 return self.policies
+
             for i in range(0,numPolicyUnit,1):
                  if(i==numPolicyUnit-1): #last iteration
                     endHostsPerPolicyUnit = numEndHostsToAssign #assign remaining endHosts
                  sourceAddressesList =self.getRandomEndhosts(endHostsPerPolicyUnit)
                  self.setSource(list_PolicyUnits[i],sourceAddressesList)
                  numEndHostsToAssign = numEndHostsToAssign - endHostsPerPolicyUnit
+
+            for i in range(0,numPolicyUnit,1):
+                list_PolicyUnits.pop(i)
+
         return self.policies
 
     def getRandomEndhosts(self,endHostsPerPolicyUnit):
         # based on the random.sample method
-
-       # print("set of",endHostsPerPolicyUnit,"should be created")
-        #print(len(self.endHostsSet),"total end hosts")
-        randomEndhostsSet =set([])
+        randomEndhostsSet=set([])
         randomEndhosts = set(random.sample(self.endHostsSet,endHostsPerPolicyUnit))
-       # print("got the sample, sample size:",len(randomEndhosts), "random end hosts")
         self.endHostsSet = self.endHostsSet - randomEndhosts
-      #  print(len(self.endHostsSet), "new substracted size of endHostsSet")
         return randomEndhosts
 
 
@@ -91,7 +100,6 @@ class SourceInfo:
        # assert isinstance(policyUnit,Policy)
         for each_endHost in endHosts_toAssign:
             p=Policy()
-
             p.setSource(each_endHost)
             p.setAction(policyUnit.getAction())
             p.setDestAccessPoints(policyUnit.getDestAccessPoints())
@@ -105,15 +113,15 @@ class SourceInfo:
         return parentList
 
     def getNumber_policy(self,percentageY,totalPolicies):
-
-        percentageX = percentageY - self.policyPercentageCovered
-        number = int((percentageY/100)*totalPolicies)
+        percentageY = percentageY - self.policyPercentageCovered
+        number=(percentageY/100)*totalPolicies
+        number = int(math.ceil(number))
         self.policyPercentageCovered =self.policyPercentageCovered + percentageY
         return number
 
     def getNumber_endhost(self,percentageX,numEndHosts):
 
-        percentageY = percentageX - self.hostPercentegeCovered
+        percentageX= percentageX - self.hostPercentegeCovered
         number = int((percentageX/100)*numEndHosts)
         self.hostPercentegeCovered =self.hostPercentegeCovered + percentageX
         return number

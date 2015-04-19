@@ -9,21 +9,23 @@ class DestInfo:
     def __init__(self):
         self.percentageCovered =0
 
-    """
-    Method: traverseDestInfoGraph
 
-    Inputs:
-    :arg1 destInfoGraph - list of points in DestInfo graph
-    :arg2 totalPolicyUnits - total no. of policy units
-    :arg3 subnetsList - list of subnets in the network
-    subnetsList can be obtained by createSubnets and createEqualSubnets methods
-
-    :returns list_PolicyUnits : list of policy units
-
-    AP = Access Point
-    access points are routers
-    """
     def traverseDestInfoGraph(self,destInfoGraph,totalPolicyUnits,subnetsList):
+        """
+        Method: traverseDestInfoGraph
+
+        Inputs:
+        :arg1 destInfoGraph - list of points in DestInfo graph
+        :arg2 totalPolicyUnits - total no. of policy units
+        :arg3 subnetsList - list of subnets in the network
+        subnetsList can be obtained by createSubnets and createEqualSubnets methods
+
+        :returns list_PolicyUnits : list of policy units
+
+        AP = Access Point
+        access points are routers
+        """
+
         allocatedPolicyUnits=0
         accessPoints=self.createAccessPoints(subnetsList)
         totalAccessPoints = len(accessPoints)
@@ -40,7 +42,7 @@ class DestInfo:
         return list_PolicyUnits
 
     def getNumber_policy(self,percentageX,totalPolicyUnits):
-        # print(self.percentageCovered,"percentage covered")
+
         percentageX = percentageX - self.percentageCovered
         number =(percentageX/100)*totalPolicyUnits
         if(number<1):
@@ -52,6 +54,7 @@ class DestInfo:
 
 
     def createPolicyUnits(self,numberPolicies,number_spannedAPs,accessPoints):
+
         policyUnits = []
         # from DestGraph, we can just set Destinations and actions for Policy Units
         for index in range(0,numberPolicies,1):
