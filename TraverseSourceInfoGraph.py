@@ -1,3 +1,5 @@
+from pkg_resources import null_ns_handler
+
 __author__ = 'vishlesh'
 
 from SDN_RuleSetGenerator.TraverseDestInfoGraph import *
@@ -115,7 +117,9 @@ class SourceInfo:
     def getNumber_policy(self,percentageY,totalPolicies):
         percentageY = percentageY - self.policyPercentageCovered
         number=(percentageY/100)*totalPolicies
-        number = int(math.ceil(number))
+        number = int(number)
+        if(number==0):
+            number = 1
         self.policyPercentageCovered =self.policyPercentageCovered + percentageY
         return number
 
