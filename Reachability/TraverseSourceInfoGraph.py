@@ -1,10 +1,7 @@
-from pkg_resources import null_ns_handler
-
 __author__ = 'vishlesh'
 
-from SDN_RuleSetGenerator.TraverseDestInfoGraph import *
+from SDN_RuleSetGenerator.Reachability.TraverseDestInfoGraph import *
 from SDN_RuleSetGenerator.Policy import *
-import ipaddress
 
 
 class SourceInfo:
