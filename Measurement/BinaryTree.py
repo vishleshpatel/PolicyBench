@@ -46,7 +46,7 @@ class AVLTree():
         else:
             return 0
 
-    def rebalance (self, node_to_rebalance):
+    def rebalance(self, node_to_rebalance):
         self.rebalance_count += 1
         A = node_to_rebalance
         F = A.parent #allowed to be NULL
@@ -201,6 +201,25 @@ class AVLTree():
                 self.elements_count += 1
                 self.add_as_child (self.rootNode, node)
 
+    def inorder_non_recursive(self):
+        node = self.rootNode
+        retlst = []
+        while node.leftChild:
+            node = node.leftChild
+        while (node):
+
+            retlst += [node]
+
+            if (node.rightChild):
+                node = node.rightChild
+                while node.leftChild:
+                    node = node.leftChild
+            else:
+                while ((node.parent)  and (node == node.parent.rightChild)):
+                    node = node.parent
+                node = node.parent
+        return retlst
+
     def find(self, key):
         return self.find_in_subtree (self.rootNode, key )
 
@@ -215,14 +234,20 @@ class AVLTree():
             return node
 
 """
-node = Node(1,ipaddress.ip_network('10.0.0.0/24'),ipaddress.ip_network('10.0.0.0/24'))
-tree = AVLTree(node)
-node = Node(2,None,None)
-tree.insert_node(node)
-node = Node(3,None,None)
-tree.insert_node(node)
-node = Node(4,None,None)
-tree.insert_node(node)
+rootnode = Node(1,ipaddress.ip_network('10.0.0.0/24'),ipaddress.ip_network('10.0.0.0/24'))
+tree = AVLTree(rootnode)
+node1 = Node(2,None,None)
+tree.insert_node(node1)
+node2 = Node(3,None,None)
+tree.insert_node(node2)
+node3 = Node(4,None,None)
+tree.insert_node(node3)
 print(tree.height())
 print(tree.find(2).dstIP)
+print(tree.rootNode.key,"feffs")
+
+list2=tree.inorder_non_recursive()
+for each_node in list2:
+    print(each_node.key)
+print(len(list2))
 """

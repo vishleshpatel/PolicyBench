@@ -6,14 +6,20 @@ from SDN_RuleSetGenerator.Action import *
 class Policy:
     def __init__(self):
 
-        destinationAccessPoints = None
-        source = None
-        action = None
+        self.destinationAccessPoints = None
+        self.destination =None
+        self.source = None
+        self.action = None
 
     def setDestAccessPoints(self,listDestAP):
         self.destinationAccessPoints = listDestAP
     def getDestAccessPoints(self):
         return self.destinationAccessPoints
+
+    def setDest(self,dest):
+        self.destination = dest
+    def getDest(self):
+        return self.destination
 
     def setAction(self,action):
         self.action = action

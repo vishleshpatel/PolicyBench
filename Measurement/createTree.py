@@ -10,8 +10,8 @@ class CreateTree:
         key = 1
         n = Node(key,srcIP,dstIP)
         t = AVLTree(n)
-        srcVisitList =[]
-        srcAddList =[]
+        srcVisitList =[]   # list of sourceIPs which are visited in next iteration
+        srcAddList =[]     # list of sourceIPs whichs will be inserted in tree now in this iteration
         dstVisitList = []
         dstAddList = []
 
@@ -20,12 +20,13 @@ class CreateTree:
 
             ## flip the coin and randomly choose to divide srcIP or dstIP
             if(srcIP._prefixlen==32 and dstIP._prefixlen==32):
-                print("tree completely created","key =",key)
+                #print("tree completely created","key =",key)
                 break
             else:
                 if(side_flipcoin==0):
                     if(srcIP._prefixlen == 32):
                         continue
+
                     srcAddList.extend(list(srcIP.subnets()))
                     #print(srcAddList)
                     srcVisitList.extend(list(srcIP.subnets()))
@@ -56,11 +57,13 @@ class CreateTree:
                     dstIP=list(dstIP.subnets()).pop(0)
         return t
 
-
+"""
 srcIP = ipaddress.ip_network('10.0.0.0/24')
 dstIP = ipaddress.ip_network('10.0.0.0/24')
 c = CreateTree()
 tree = c.createTree(srcIP,dstIP)
 print(tree.height())
-Node = tree.find(1)
-print(Node.srcIP)
+print(tree.elements_count,"total count")
+Node = tree.find(2)
+print(Node.key,Node.srcIP,Node.dstIP)
+"""
