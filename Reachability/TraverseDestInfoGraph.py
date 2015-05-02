@@ -2,7 +2,7 @@ __author__ = 'vishlesh'
 
 import random
 import math
-from Policy import *
+from SDN_RuleSetGenerator.Policy import *
 from SDN_RuleSetGenerator.Action import *
 
 class DestInfo:
