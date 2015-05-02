@@ -7,7 +7,7 @@ s = Subnet()
 subnetList = s.createSubnets(50000)
 m = MeasurementPolicies()
 listPolicies = []
-listPolicies = m.generateMeasurementPolicies(subnetList,30)
+listPolicies = m.generateMeasurementPolicies(subnetList,40)
 for each_policy in listPolicies:
     assert isinstance(each_policy,Policy)
     print(each_policy.getSource(),"source",each_policy.getDest(),"destination",each_policy.getAction(),"action")

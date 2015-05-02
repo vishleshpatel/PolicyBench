@@ -14,16 +14,17 @@ class MeasurementPolicies():
         while(resourcesLeft>0):
             randomNo = random.randint(0,len(subnetsList)-1)
             sourceIP =  subnetsList[randomNo]
+            #print("subnetIP selected as rootNode sourceIP:",sourceIP)
             subnetsList.pop(randomNo)
             randomNo = random.randint(0,len(subnetsList)-1)
             destIP =subnetsList[randomNo]
             subnetsList.pop(randomNo)
             c = CreateTree()
             tree = c.createTree(sourceIP,destIP)
-            print(tree.height(),"height",
-                  tree.rootNode.srcIP,"root node srcIP",
-                  tree.rootNode.dstIP,"root node dstIP",
-                  tree.elements_count,"total nodes in tree")
+            print("height:",tree.height(),
+                  "root node srcIP :",tree.rootNode.srcIP,
+                  "root node dstIP :",tree.rootNode.dstIP,
+                  "total nodes in tree :",tree.elements_count)
             while(1):
                 noPolicy = random.randint(1,resourcesLeft)
                 if(noPolicy<tree.elements_count):
