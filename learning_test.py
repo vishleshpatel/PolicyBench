@@ -4,19 +4,26 @@ from enum import Enum
 import ipaddress
 import random
 
+def compareIP(srcIp1,srcIp2):
+   list1=srcIp1.subnets()
+   if(srcIp2==list1.pop(0)):
+       print("ip2 is less")
+
+
 srcIp = ipaddress.ip_network('10.0.0.0/24')
-if srcIp._prefixlen == 31:
-    print(srcIp.netmask,"ds")
-list1 = list(srcIp.subnets())
-srcIp1 = list1.pop(0)
-srcIp2=list1.pop()
-print(srcIp,"ip")
-print(srcIp1,"ip1")
-print(srcIp2,"ip2")
-if srcIp2>=srcIp:
-    print("dnsd")
-else:
-    print("loda")
+srcIp1 = ipaddress.ip_network('10.0.0.0/25')
+srcIp2 =ipaddress.ip_network('10.0.0.64/26')
+srcIp3=ipaddress.ip_network('10.0.0.0/31')
+if(srcIp.network_address==srcIp3.network_address):
+    print(srcIp.network_address,"dsd")
+if(srcIp.network_address<srcIp2.network_address):
+    print("dfsd")
+
+
+compareIP(srcIp,srcIp3)
+
+
+
 
 list= [1,2,3,4,5,6,7]
 print(list)

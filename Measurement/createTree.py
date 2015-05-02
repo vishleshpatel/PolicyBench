@@ -1,35 +1,66 @@
 __author__ = 'vishlesh'
 
 import ipaddress
+import random
 from SDN_RuleSetGenerator.Measurement.BinaryTree import *
 class CreateTree:
 
     def createTree(self, srcIP, dstIP):
-       # assert srcIP == ipaddress.ip_network  ##check for the type of srcIP and dstIP
-        #assert dstIP == ipaddress.ip_network
-        #assert isinstance(srcIP,ipaddress.ip_network)
-        #assert isinstance(dstIP,ipaddress.ip_network)
 
         key = 1
-        n = rbnode(key,srcIP,dstIP)
-        t = rbtree(n)
+        n = Node(key,srcIP,dstIP)
+        t = AVLTree(n)
+        srcVisitList =[]
+        srcAddList =[]
+        dstVisitList = []
+        dstAddList = []
 
         while(1):
             side_flipcoin = random.randint(0,1)
+
             ## flip the coin and randomly choose to divide srcIP or dstIP
-            if(side_flipcoin==0):
-                if(srcIP._prefixlen == 32):
-                    continue
-                srcIP =list(srcIP.subnets()).pop(0)
+            if(srcIP._prefixlen==32 and dstIP._prefixlen==32):
+                print("tree completely created","key =",key)
+                break
             else:
-                if(dstIP._prefixlen == 32):
-                    continue
-                dstIP=list(dstIP.subnets()).pop(0)
-            key = key+1
-            treeNode = rbnode(key,srcIP,dstIP)
-            t.insert_node(treeNode)
+                if(side_flipcoin==0):
+                    if(srcIP._prefixlen == 32):
+                        continue
+                    srcAddList.extend(list(srcIP.subnets()))
+                    #print(srcAddList)
+                    srcVisitList.extend(list(srcIP.subnets()))
+                    key = key+1
+                    srcIP = srcAddList.pop(0)
+                    treeNode1 = Node(key,srcIP,dstIP)
+                    t.insert_node(treeNode1)
+                    key = key+1
+                    srcIP = srcAddList.pop()
+                    treeNode2 = Node(key,srcIP,dstIP)
+                    t.insert_node(treeNode2)
+                    srcIP = srcVisitList.pop(0)
+                else:
+                    if(dstIP._prefixlen == 32):
+                        continue
+
+                    dstAddList.extend(list(dstIP.subnets()))
+                    dstVisitList.extend(list(dstIP.subnets()))
+                    key = key+1
+                    dstIP = dstAddList.pop(0)
+                    treeNode1 = Node(key,srcIP,dstIP)
+                    t.insert_node(treeNode1)
+                    key = key+1
+                    dstIP = dstAddList.pop()
+                    treeNode2 = Node(key,srcIP,dstIP)
+                    t.insert_node(treeNode2)
+                    dstIP = dstVisitList.pop(0)
+                    dstIP=list(dstIP.subnets()).pop(0)
+        return t
+
 
 srcIP = ipaddress.ip_network('10.0.0.0/24')
-dstIP = ipaddress.ip_network('10.0.1.0/24')
+dstIP = ipaddress.ip_network('10.0.0.0/24')
 c = CreateTree()
-c.createTree(srcIP,dstIP)
+tree = c.createTree(srcIP,dstIP)
+print(tree.height())
+Node = tree.find(1)
+print(Node.srcIP)

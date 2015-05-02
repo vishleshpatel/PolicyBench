@@ -214,7 +214,7 @@ class AVLTree():
         else:  # key is equal to node key
             return node
 
-
+"""
 node = Node(1,ipaddress.ip_network('10.0.0.0/24'),ipaddress.ip_network('10.0.0.0/24'))
 tree = AVLTree(node)
 node = Node(2,None,None)
@@ -225,3 +225,4 @@ node = Node(4,None,None)
 tree.insert_node(node)
 print(tree.height())
 print(tree.find(2).dstIP)
+"""
