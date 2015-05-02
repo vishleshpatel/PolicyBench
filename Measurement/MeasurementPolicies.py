@@ -55,7 +55,7 @@ class MeasurementPolicies():
         :return:
         """
         list1 = tree.inorder_non_recursive()
-        print(len(list1),"list of all elements in tree")
+        #print(len(list1),"list of all elements in tree")
         returnList = []
         while(noNodes>0):
             node = random.choice(list1)
