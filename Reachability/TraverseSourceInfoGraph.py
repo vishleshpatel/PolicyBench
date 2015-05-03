@@ -63,7 +63,7 @@ class SourceInfo:
             numPolicyUnit = self.getNumber_policy(y,totalPolicyUnits)   
             # numEndHostsToAssign = number of [end hosts = sources] needs to assign to bunch of policy units  
             numEndHostsToAssign= self.getNumber_endhost(x,totalNumEndHosts)
-            # endHosts 
+            # endHosts / sources per policy unit
             sourcesPerPolicyUnit = int(numEndHostsToAssign/numPolicyUnit)
 
             if(((x,y)==sourceInfoGraph[len(sourceInfoGraph)-1]) or numPolicyUnit>=len(list_PolicyUnits)):
@@ -73,7 +73,7 @@ class SourceInfo:
                       #last iteration
                      sourceAddressesList =self.getRandomEndhosts(sourcesPerPolicyUnit)
                      self.setSource(list_PolicyUnits[i],sourceAddressesList)
-                     #self.selected_srcIPs.extend(sourceAddressesList)
+                    # update set of selected sourceIPs
                      self.set_selectedSrcIPs.update(sourceAddressesList)
                  return self.policies
 
@@ -82,6 +82,7 @@ class SourceInfo:
                     sourcesPerPolicyUnit = numEndHostsToAssign #assign remaining endHosts
                  sourceAddressesList =self.getRandomEndhosts(sourcesPerPolicyUnit)
                  self.setSource(list_PolicyUnits[i],sourceAddressesList)
+                 # update set of selected sourceIPs
                  self.set_selectedSrcIPs.update(sourceAddressesList)
                  numEndHostsToAssign = numEndHostsToAssign - sourcesPerPolicyUnit
 

@@ -34,49 +34,68 @@ class DestInfo:
         list_PolicyUnits = []
         for (x,y) in destInfoGraph:
             numPolicyUnitsToCreate = self.getNumber_policy(y,totalPolicyUnits)
+
+            ### if statement for corner(last) case
             if((x,y)==destInfoGraph[len(destInfoGraph)-1]):
                 numPolicyUnitsToCreate=totalPolicyUnits - allocatedPolicyUnits
-            number_spannedAPs = self.getSpannedDeviceNumber(x,totalAccessPoints)
+
+            ### num_spannedAPs = spanned routers/access points per policy units
+            num_spannedAPs = self.getSpannedDeviceNumber(x,totalAccessPoints)
             if numPolicyUnitsToCreate==0:
                 continue
-            list_PolicyUnits.extend(self.createPolicyUnits(numPolicyUnitsToCreate,number_spannedAPs,accessPoints))
+
+            list_PolicyUnits.extend(self.createPolicyUnits(numPolicyUnitsToCreate,num_spannedAPs,accessPoints))
             allocatedPolicyUnits = allocatedPolicyUnits + numPolicyUnitsToCreate
         return list_PolicyUnits
 
-    def getNumber_policy(self,percentageX,totalPolicyUnits):
+    def getNumber_policy(self,percentageY,totalPolicyUnits):
 
-        percentageX = percentageX - self.percentageCovered
-        number =(percentageX/100)*totalPolicyUnits
+        percentageY = percentageY - self.percentageCovered
+        number =(percentageY/100)*totalPolicyUnits
         if(number<1):
             return 0
         else:
             number = int(number)
-        self.percentageCovered =self.percentageCovered + percentageX
+        self.percentageCovered =self.percentageCovered + percentageY
         return number
 
 
-    def createPolicyUnits(self,numPolicyUnits,number_spannedAPs,accessPoints):
+    def createPolicyUnits(self,numPolicyUnits,num_spannedAPs,accessPoints):
 
         policyUnits = []
         # from DestGraph, we can just set Destinations and actions for Policy Units
         for index in range(0,numPolicyUnits,1):
-            accessPoints_Policy = random.sample(accessPoints,number_spannedAPs)
+            ####accessPointsInCurrentPolicyUnit = accessPoints spanned in the current policy units
+            accessPointsInCurrentPolicyUnit= random.sample(accessPoints,num_spannedAPs)
             p = Policy()
-            p.setDestAccessPoints(accessPoints_Policy)
-            self.set_selectedDestIPs.update(accessPoints_Policy)
+            p.setDestAccessPoints(accessPointsInCurrentPolicyUnit)
             a = Action(1)   # action type: forward
             p.setAction(a)
             policyUnits.append(p)
+
+            ### Update set_selectedDestIPs
+
+            subSet_destIPs = set([])
+            ### add each subnet address in  accessPointsInCurrentPolicyUnit,
+            ### add that subnet address into set_selectedDestIps
+            for each_router in accessPointsInCurrentPolicyUnit:
+                self.set_selectedDestIPs.update(each_router)
+            #subSet_destIPs = list(sublist_destIPs)
+            #self.set_selectedDestIPs.update(subSet_destIPs)
+
         return policyUnits
 
-    def getSpannedDeviceNumber(self,percentageY,totalAccessPoints):
-        number = int(math.ceil((percentageY/100)*totalAccessPoints))
+    def getSpannedDeviceNumber(self,percentageX,totalAccessPoints):
+        number = int(math.ceil((percentageX/100)*totalAccessPoints))
         return number
 
     def createAccessPoints(self,subnetsList):
 
         totalSubnets = len(subnetsList)
         totalAccessPoints = random.randint(15,20)
+         #### make a group of 15-20 subnets and assign that group of subnets to one router / access point
+         ####  From paper: We say a policy unit “spans” a router if any of the end-points that
+         ####   are part of the policy unit are connected directly to that router
         subnetsPerAP = int(math.ceil(totalSubnets/totalAccessPoints))
 
         accessPoints = []

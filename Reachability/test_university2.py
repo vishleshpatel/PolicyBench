@@ -26,6 +26,11 @@ for each_policy in list_PolicyUnits:
     print(each_policy.getAction())
 
 print(len(policies),"total no. of end point reachability policies")
+
+#print("set of sources: ", sourceInfoObj.set_selectedSrcIPs)
+print("total no. of selected sources:", len(sourceInfoObj.set_selectedSrcIPs))
+print("total no. of selcted destination IPs",len(destinationInfoObj.set_selectedDestIPs))
+print("set of destinations: ",destinationInfoObj.set_selectedDestIPs)
 """
 for each_policy in policies:
     print(each_policy.getSource())

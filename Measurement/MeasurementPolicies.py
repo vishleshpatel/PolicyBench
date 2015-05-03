@@ -9,7 +9,9 @@ class MeasurementPolicies():
     def __init__(self):
         self.listPolicies = []
 
-    def generateMeasurementPolicies(self, subnetsList, resources):
+    def generateMeasurementPolicies(self, set_sourceIPs, set_destIPs, resources):
+        list_sourceIPs = list(set_sourceIPs)
+        list_destIPs = li
         resourcesLeft = resources
         while(resourcesLeft>0):
             randomNo = random.randint(0,len(subnetsList)-1)
