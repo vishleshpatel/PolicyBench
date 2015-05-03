@@ -11,6 +11,7 @@ class SourceInfo:
         self.hostPercentegeCovered=0
         self.endHostsSet= set([])
         self.policies=[]
+        self.set_selectedSrcIPs = set([])
 
     def getAllEndHosts(self,subnetsList):
         """
@@ -58,35 +59,41 @@ class SourceInfo:
 
         for (x,y) in sourceInfoGraph:
             totalNumEndHosts = len(self.endHostsSet)
-            numPolicyUnit = self.getNumber_policy(y,totalPolicyUnits)
+            #numPolicyUnit: number of policy units needs to fill up by sourceIPs in this iteration
+            numPolicyUnit = self.getNumber_policy(y,totalPolicyUnits)   
+            # numEndHostsToAssign = number of [end hosts = sources] needs to assign to bunch of policy units  
             numEndHostsToAssign= self.getNumber_endhost(x,totalNumEndHosts)
-            endHostsPerPolicyUnit = int(numEndHostsToAssign/numPolicyUnit)
+            # endHosts 
+            sourcesPerPolicyUnit = int(numEndHostsToAssign/numPolicyUnit)
 
             if(((x,y)==sourceInfoGraph[len(sourceInfoGraph)-1]) or numPolicyUnit>=len(list_PolicyUnits)):
                  numPolicyUnit=len(list_PolicyUnits)
-                 endHostsPerPolicyUnit = int(len(self.endHostsSet)/numPolicyUnit)
+                 sourcesPerPolicyUnit = int(len(self.endHostsSet)/numPolicyUnit)
                  for i in range(0,numPolicyUnit,1):
                       #last iteration
-                     sourceAddressesList =self.getRandomEndhosts(endHostsPerPolicyUnit)
+                     sourceAddressesList =self.getRandomEndhosts(sourcesPerPolicyUnit)
                      self.setSource(list_PolicyUnits[i],sourceAddressesList)
+                     #self.selected_srcIPs.extend(sourceAddressesList)
+                     self.set_selectedSrcIPs.update(sourceAddressesList)
                  return self.policies
 
             for i in range(0,numPolicyUnit,1):
                  if(i==numPolicyUnit-1): #last iteration
-                    endHostsPerPolicyUnit = numEndHostsToAssign #assign remaining endHosts
-                 sourceAddressesList =self.getRandomEndhosts(endHostsPerPolicyUnit)
+                    sourcesPerPolicyUnit = numEndHostsToAssign #assign remaining endHosts
+                 sourceAddressesList =self.getRandomEndhosts(sourcesPerPolicyUnit)
                  self.setSource(list_PolicyUnits[i],sourceAddressesList)
-                 numEndHostsToAssign = numEndHostsToAssign - endHostsPerPolicyUnit
+                 self.set_selectedSrcIPs.update(sourceAddressesList)
+                 numEndHostsToAssign = numEndHostsToAssign - sourcesPerPolicyUnit
 
             for i in range(0,numPolicyUnit,1):
                 list_PolicyUnits.pop(i)
 
         return self.policies
 
-    def getRandomEndhosts(self,endHostsPerPolicyUnit):
+    def getRandomEndhosts(self,sourcesPerPolicyUnit):
         # based on the random.sample method
         randomEndhostsSet=set([])
-        randomEndhosts = set(random.sample(self.endHostsSet,endHostsPerPolicyUnit))
+        randomEndhosts = set(random.sample(self.endHostsSet,sourcesPerPolicyUnit))
         self.endHostsSet = self.endHostsSet - randomEndhosts
         return randomEndhosts
 

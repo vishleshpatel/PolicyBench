@@ -8,6 +8,8 @@ from SDN_RuleSetGenerator.Action import *
 class DestInfo:
     def __init__(self):
         self.percentageCovered =0
+        # save selected destination IPs for policy overlap
+        self.set_selectedDestIPs =set([])
 
 
     def traverseDestInfoGraph(self,destInfoGraph,totalPolicyUnits,subnetsList):
@@ -31,14 +33,14 @@ class DestInfo:
         totalAccessPoints = len(accessPoints)
         list_PolicyUnits = []
         for (x,y) in destInfoGraph:
-            numberPoliciesToCreate = self.getNumber_policy(y,totalPolicyUnits)
+            numPolicyUnitsToCreate = self.getNumber_policy(y,totalPolicyUnits)
             if((x,y)==destInfoGraph[len(destInfoGraph)-1]):
-                numberPoliciesToCreate=totalPolicyUnits - allocatedPolicyUnits
+                numPolicyUnitsToCreate=totalPolicyUnits - allocatedPolicyUnits
             number_spannedAPs = self.getSpannedDeviceNumber(x,totalAccessPoints)
-            if numberPoliciesToCreate==0:
+            if numPolicyUnitsToCreate==0:
                 continue
-            list_PolicyUnits.extend(self.createPolicyUnits(numberPoliciesToCreate,number_spannedAPs,accessPoints))
-            allocatedPolicyUnits = allocatedPolicyUnits + numberPoliciesToCreate
+            list_PolicyUnits.extend(self.createPolicyUnits(numPolicyUnitsToCreate,number_spannedAPs,accessPoints))
+            allocatedPolicyUnits = allocatedPolicyUnits + numPolicyUnitsToCreate
         return list_PolicyUnits
 
     def getNumber_policy(self,percentageX,totalPolicyUnits):
@@ -53,18 +55,18 @@ class DestInfo:
         return number
 
 
-    def createPolicyUnits(self,numberPolicies,number_spannedAPs,accessPoints):
+    def createPolicyUnits(self,numPolicyUnits,number_spannedAPs,accessPoints):
 
         policyUnits = []
         # from DestGraph, we can just set Destinations and actions for Policy Units
-        for index in range(0,numberPolicies,1):
+        for index in range(0,numPolicyUnits,1):
             accessPoints_Policy = random.sample(accessPoints,number_spannedAPs)
             p = Policy()
             p.setDestAccessPoints(accessPoints_Policy)
+            self.set_selectedDestIPs.update(accessPoints_Policy)
             a = Action(1)   # action type: forward
             p.setAction(a)
             policyUnits.append(p)
-
         return policyUnits
 
     def getSpannedDeviceNumber(self,percentageY,totalAccessPoints):

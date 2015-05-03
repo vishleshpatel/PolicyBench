@@ -207,7 +207,6 @@ class AVLTree():
         while node.leftChild:
             node = node.leftChild
         while (node):
-
             retlst += [node]
 
             if (node.rightChild):
