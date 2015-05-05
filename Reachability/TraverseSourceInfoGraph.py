@@ -11,7 +11,9 @@ class SourceInfo:
         self.hostPercentegeCovered=0
         self.endHostsSet= set([])
         self.policies=[]
-        self.set_selectedSrcIPs = set([])
+        #self.set_selectedSrcIPs = set([])
+        #### there is no need to save the selected sourceIPs because every end hosts will be assigned
+        #### some random policy unit.
 
     def getAllEndHosts(self,subnetsList):
         """
@@ -39,6 +41,7 @@ class SourceInfo:
         """
         list = []
         for addr in networkAddr:
+          #  print(addr,"test")
             list.append(addr)
 
         list.pop()
@@ -72,9 +75,10 @@ class SourceInfo:
                  for i in range(0,numPolicyUnit,1):
                       #last iteration
                      sourceAddressesList =self.getRandomEndhosts(sourcesPerPolicyUnit)
+                     #self.set_selectedSrcIPs.update(sourceAddressesList)
                      self.setSource(list_PolicyUnits[i],sourceAddressesList)
                     # update set of selected sourceIPs
-                     self.set_selectedSrcIPs.update(sourceAddressesList)
+
                  return self.policies
 
             for i in range(0,numPolicyUnit,1):
@@ -82,8 +86,8 @@ class SourceInfo:
                     sourcesPerPolicyUnit = numEndHostsToAssign #assign remaining endHosts
                  sourceAddressesList =self.getRandomEndhosts(sourcesPerPolicyUnit)
                  self.setSource(list_PolicyUnits[i],sourceAddressesList)
-                 # update set of selected sourceIPs
-                 self.set_selectedSrcIPs.update(sourceAddressesList)
+                 ## update set of selected sourceIPs
+                 #self.set_selectedSrcIPs.update(sourceAddressesList)
                  numEndHostsToAssign = numEndHostsToAssign - sourcesPerPolicyUnit
 
             for i in range(0,numPolicyUnit,1):
@@ -96,8 +100,8 @@ class SourceInfo:
         randomEndhostsSet=set([])
         randomEndhosts = set(random.sample(self.endHostsSet,sourcesPerPolicyUnit))
         self.endHostsSet = self.endHostsSet - randomEndhosts
-        return randomEndhosts
-
+        list_randomEndHosts = list(randomEndhosts)
+        return list_randomEndHosts
 
     def setSource(self,policyUnit,endHosts_toAssign):
        # assert isinstance(policyUnit,Policy)
