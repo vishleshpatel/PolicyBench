@@ -38,9 +38,9 @@ print("set of destinations: ",destinationInfoObj.set_selectedDestIPs)
 
 print("measurement policy part")
 m = MeasurementPolicies()
-listPolicies = []
-listPolicies = m.generateMeasurementPolicies(subnetList,destinationInfoObj.set_selectedDestIPs,40)
-for each_policy in listPolicies:
+listMeasurePolicies = []
+listMeasurePolicies = m.generateMeasurementPolicies(subnetList,destinationInfoObj.set_selectedDestIPs,40)
+for each_policy in listMeasurePolicies:
     assert isinstance(each_policy,Policy)
     print(each_policy.getSource(),"source",each_policy.getDest(),"destination",each_policy.getAction(),"action")
-print(len(listPolicies),"finally finished")
+print(len(listMeasurePolicies),"finally finished")
