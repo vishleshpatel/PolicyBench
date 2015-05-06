@@ -11,7 +11,14 @@ def compareIP(srcIp1,srcIp2):
 
 
 srcIp = ipaddress.ip_network('10.0.0.0/24')
-srcIp1 = ipaddress.ip_network('10.0.0.0/25')
+srcIp1 = ipaddress.ip_address('10.0.0.1')
+for each_addr in srcIp:
+    if each_addr==srcIp1:
+        print(each_addr,"match")
+i = srcIp._prefixlen
+print(i,"dsf")
+
+"""
 srcIp2 =ipaddress.ip_network('10.0.0.64/26')
 srcIp3=ipaddress.ip_network('10.0.0.0/31')
 if(srcIp.network_address==srcIp3.network_address):
@@ -30,3 +37,4 @@ print(list)
 list.pop()
 print(list)
 print(random.sample(list,3))
+"""

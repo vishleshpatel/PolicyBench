@@ -109,7 +109,7 @@ class SourceInfo:
             p=Policy()
             p.setSource(each_endHost)
             p.setAction(policyUnit.getAction())
-            p.setDestAccessPoints(policyUnit.getDestAccessPoints())
+            p.setDest(policyUnit.getDest())
             self.policies.append(p)
 
     def substract(self,parentList,subList):

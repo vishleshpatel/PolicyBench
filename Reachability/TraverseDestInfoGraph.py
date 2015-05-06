@@ -65,21 +65,23 @@ class DestInfo:
         policyUnits = []
         # from DestGraph, we can just set Destinations and actions for Policy Units
         for index in range(0,numPolicyUnits,1):
-            ####accessPointsInCurrentPolicyUnit = accessPoints spanned in the current policy units
-            accessPointsInCurrentPolicyUnit= random.sample(accessPoints,num_spannedAPs)
+            #### accessPointsInCurrentPolicyUnit = accessPoints spanned in the current policy units
+            accessPointsInCurrentPolicyUnit=random.sample(accessPoints,num_spannedAPs)
+            list_subnetAddr = []
+            # get all subnets
+            for each_router in accessPointsInCurrentPolicyUnit:
+                list_subnetAddr.extend(each_router)
             p = Policy()
-            p.setDestAccessPoints(accessPointsInCurrentPolicyUnit)
+            p.setDest(list_subnetAddr)
             a = Action(1)   # action type: forward
             p.setAction(a)
             policyUnits.append(p)
 
             ### Update set_selectedDestIPs
-
             subSet_destIPs = set([])
             ### add each subnet address in  accessPointsInCurrentPolicyUnit,
             ### add that subnet address into set_selectedDestIps
-            for each_router in accessPointsInCurrentPolicyUnit:
-                self.set_selectedDestIPs.update(each_router)
+            self.set_selectedDestIPs.update(set(list_subnetAddr))
             #subSet_destIPs = list(sublist_destIPs)
             #self.set_selectedDestIPs.update(subSet_destIPs)
 
