@@ -49,5 +49,10 @@ for each_policy in listMeasurePolicies:
 print(len(listMeasurePolicies),"finally finished")
 
 o = Overlap()
-match_count = o.testOverlapInPolicies(fwd_policies,listMeasurePolicies)
-print(match_count,"count of overlaps")
+list_match_count = o.testOverlapInPolicies(fwd_policies,listMeasurePolicies)
+print(list_match_count,"list of match count")
+print(len(list_match_count))
+count = 0
+for each_element in list_match_count:
+    count=count+1
+print(count,"total count")

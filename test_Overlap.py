@@ -8,15 +8,17 @@ import ipaddress
 
 class Overlap():
     def __init__(self):
-       self.match_count = 0
+       self.list_match_count = []
 
     def testOverlapInPolicies(self,listReachablityPolicies,listMeasurementPolicies):
         assert isinstance(listMeasurementPolicies,list)
         assert isinstance(listReachablityPolicies,list)
-
+        iteration = -1
         for each_measure_policy in listMeasurementPolicies:
+            iteration =iteration+1
+            print(iteration,"length of list of match counts: ",len(self.list_match_count))
+            match = False
             for each_forward_policy in listReachablityPolicies:
-                match = False
                 assert isinstance(each_measure_policy,Policy)
                 assert isinstance(each_forward_policy,Policy)
                 subnetIPaddr = each_measure_policy.getSource()
@@ -27,12 +29,20 @@ class Overlap():
                     for each_addr in listDestAddr_fwd:
                         if self.isDestMatch(each_addr,destIPaddr_measure):
                             match =True
-                            self.match_count =self.match_count+1
+                            if len(self.list_match_count)<=iteration:
+                                if len(self.list_match_count)==iteration:
+                                   # print("i am here")
+                                    self.list_match_count.append(1)
+                            else:
+                                count = self.list_match_count[iteration]
+                                count=count+1
+                                #self.list_match_count.insert(iteration,self.list_match_count[iteration]+1)
+                                self.list_match_count[iteration]=count
                             break
-                if(match==True):
-                   break
-
-        return self.match_count
+            if(match==False):
+                self.list_match_count.append(0)
+            print("previous count:" ,self.list_match_count[iteration])
+        return self.list_match_count
 
     def isSourceMatch(self,endHost,subnetIPaddr):
 
