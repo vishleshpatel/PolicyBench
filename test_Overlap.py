@@ -29,10 +29,8 @@ class Overlap():
                     for each_addr in listDestAddr_fwd:
                         if self.isDestMatch(each_addr,destIPaddr_measure):
                             match =True
-                            if len(self.list_match_count)<=iteration:
-                                if len(self.list_match_count)==iteration:
-                                   # print("i am here")
-                                    self.list_match_count.append(1)
+                            if len(self.list_match_count)==iteration:
+                                self.list_match_count.append(1)
                             else:
                                 count = self.list_match_count[iteration]
                                 count=count+1

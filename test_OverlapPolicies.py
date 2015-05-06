@@ -54,5 +54,5 @@ print(list_match_count,"list of match count")
 print(len(list_match_count))
 count = 0
 for each_element in list_match_count:
-    count=count+1
+    count=count+each_element
 print(count,"total count")
