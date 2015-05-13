@@ -10,7 +10,7 @@ class MeasurementPolicies():
         self.listPolicies = []
 
     def generateMeasurementPolicies(self, subnetsList, set_destIPs, resources):
-#        assert isinstance(set_sourceIPs,set)
+        #assert isinstance(set_sourceIPs,set)
         assert isinstance(set_destIPs,set)
         resourcesLeft = resources
         while(resourcesLeft>0):
