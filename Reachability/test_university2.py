@@ -5,7 +5,7 @@ from SDN_RuleSetGenerator.Reachability.TraverseSourceInfoGraph import *
 
 # usage enter No. of hosts in the network should be given to s.createSubnets(number of End host)
 s = Subnet()
-subnetList = s.createSubnets(500)
+subnetList = s.createSubnets(1000)
 print(subnetList)
 print("total no. of subnets created:",len(subnetList))
 
@@ -26,9 +26,9 @@ for each_policy in list_PolicyUnits:
     print(each_policy.getAction())
 
 print(len(policies),"total no. of end point reachability policies")
-"""
+
 for each_policy in policies:
     print("srcIP:",each_policy.getSource())
     print("dstIP:",each_policy.getDest())
     print(each_policy.getAction())
-    """
+

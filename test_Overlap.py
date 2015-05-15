@@ -10,7 +10,7 @@ class Overlap():
     def __init__(self):
        self.list_match_count = []
 
-    def testOverlapInPolicies(self,listReachablityPolicies,listMeasurementPolicies):
+    def getOverlappedPolicies(self,listReachablityPolicies,listMeasurementPolicies):
         assert isinstance(listMeasurementPolicies,list)
         assert isinstance(listReachablityPolicies,list)
         iteration = -1

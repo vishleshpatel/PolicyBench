@@ -7,7 +7,7 @@ from SDN_RuleSetGenerator.Reachability.TraverseDestInfoGraph import *
 
 # usage enter No. of hosts in the network should be given to s.createSubnets(number of End host)
 s = Subnet()
-subnetList = s.createSubnets(500)
+subnetList = s.createSubnets(1000)
 print("subnets:",subnetList)
 print("total no. of subnets created:",len(subnetList))
 

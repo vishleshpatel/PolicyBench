@@ -10,5 +10,5 @@ listPolicies = []
 listPolicies = m.generateMeasurementPolicies(subnetList,set(subnetList),40)
 for each_policy in listPolicies:
     assert isinstance(each_policy,Policy)
-    print(each_policy.getSource(),"source",each_policy.getDest(),"destination",each_policy.getAction(),"action")
+    print("source:",each_policy.getSource(),"destination:",each_policy.getDest(),"action:",each_policy.getAction())
 print(len(listPolicies),"finally finished")

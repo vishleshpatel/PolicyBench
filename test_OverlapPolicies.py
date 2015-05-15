@@ -32,11 +32,6 @@ for each_policy in list_PolicyUnits:
 print(len(fwd_policies),"total no. of end point reachability policies")
 
 
-#print("set of sources: ", sourceInfoObj.set_selectedSrcIPs)
-#print("total no. of selected sources:", len(sourceInfoObj.set_selectedSrcIPs))
-#print(sourceInfoObj.set_selectedSrcIPs.pop())
-
-#print("total no. of selected destination IPs",len(destinationInfoObj.set_selectedDestIPs))
 print("set of destinations: ",destinationInfoObj.set_selectedDestIPs)
 
 print("measurement policy part")
@@ -49,7 +44,7 @@ for each_policy in listMeasurePolicies:
 print(len(listMeasurePolicies),"finally finished")
 
 o = Overlap()
-list_match_count = o.testOverlapInPolicies(fwd_policies,listMeasurePolicies)
+list_match_count = o.getOverlappedPolicies(fwd_policies,listMeasurePolicies)
 print(list_match_count,"list of match count")
 print(len(list_match_count))
 count = 0
