@@ -92,12 +92,19 @@ class DestInfo:
         return number
 
     def createAccessPoints(self,subnetsList):
+        """
+
+        :param subnetsList:
+        :return:
+
+         #make a group of 15-20 subnets and assign that group of subnets to one router / access point
+         #From paper: we say a policy unit "spans" a router if any of the end points that
+         #are part of the policy unit are connected directly to that router
+        """
 
         totalSubnets = len(subnetsList)
         totalAccessPoints = random.randint(15,20)
-         #### make a group of 15-20 subnets and assign that group of subnets to one router / access point
-         ####  From paper: We say a policy unit “spans” a router if any of the end-points that
-         ####   are part of the policy unit are connected directly to that router
+
         subnetsPerAP = int(math.ceil(totalSubnets/totalAccessPoints))
 
         accessPoints = []
