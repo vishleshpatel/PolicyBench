@@ -1,13 +1,14 @@
 __author__ = 'Vishlesh.Patel'
 
+
 import ipaddress
+
 import math
 import random
 
 
 
 class Subnet:
-
     ''''
     2 Methods in Class Subnet: createEqualSubnets, createSubnets
 
@@ -20,7 +21,6 @@ class Subnet:
         :argument  totalHosts : total no. of end points in entire network
         :return list of subnets having unequal no. of hosts in it
     '''''
-
 
     def createEqualSubnets(self, totalHosts, hostsPerSubnet):
 

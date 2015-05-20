@@ -1,5 +1,7 @@
 __author__ = 'vishlesh'
 
+import sys
+sys.path.append('/home/vishlesh/SDN_RuleSetGenerator')
 from SDN_RuleSetGenerator.Measurement.MeasurementPolicies import *
 from SDN_RuleSetGenerator.Reachability import *
 from SDN_RuleSetGenerator.subnet import *
