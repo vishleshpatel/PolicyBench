@@ -10,7 +10,14 @@ class Overlap():
     def __init__(self):
        self.list_match_count = []
 
+
     def getOverlappedPolicies(self,listReachablityPolicies,listMeasurementPolicies):
+
+        file_measurementPolicies = open('matchedMeasurementPolicies.txt','w').close()
+        file_measurementPolicies = open('matchedMeasurementPolicies.txt','w')
+        file_reachablityPolicies = open('matchedReachabilityPolicies.txt','w').close()
+        file_reachablityPolicies = open('matchedReachabilityPolicies.txt','w')
+
         assert isinstance(listMeasurementPolicies,list)
         assert isinstance(listReachablityPolicies,list)
         iteration = -1
@@ -29,6 +36,15 @@ class Overlap():
                     for each_addr in listDestAddr_fwd:
                         if self.isDestMatch(each_addr,destIPaddr_measure):
                             match =True
+                            string= str(each_measure_policy.getSource()) + str(', '+str(each_measure_policy.getDest())) \
+                                             + str(', '+str(each_measure_policy.getAction())+'\n')
+                            print(string)
+                            file_measurementPolicies.write(string)
+
+                            string= str(each_forward_policy.getSource()) + str(', '+str(each_forward_policy.getDest())) \
+                                             + str(', '+str(each_forward_policy.getAction())+'\n')
+                            print(string)
+                            file_reachablityPolicies.write(string)
                             if len(self.list_match_count)==iteration:
                                 self.list_match_count.append(1)
                             else:

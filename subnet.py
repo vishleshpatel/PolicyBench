@@ -46,7 +46,7 @@ class Subnet:
             print("error: maximum total hosts allowed : 262144")
             return None
 
-        networkIP = ipaddress.IPv4Network('10.0.0.0/15')
+        networkIP = ipaddress.ip_network("10.0.0.0/15",strict=False)
         list = []   # list of subnets - list of different sizes
         subnetsList = []
 

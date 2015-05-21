@@ -10,7 +10,7 @@ from SDN_RuleSetGenerator.test_Overlap import *
 
 # usage enter No. of hosts in the network should be given to s.createSubnets(number of End host)
 s = Subnet()
-subnetList = s.createSubnets(50000)
+subnetList = s.createSubnets(5000)
 print(subnetList)
 print("total no. of subnets created:",len(subnetList))
 
