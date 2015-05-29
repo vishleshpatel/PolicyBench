@@ -10,11 +10,11 @@ print(subnetList)
 print("total no. of subnets created:",len(subnetList))
 
 destinationGraph = [(60,50),(100,100)]
-totalPolicies = 2
+totalPolicyUnits = 2
 
 destinationInfoObj = DestInfo()
 sourceInfoObj = SourceInfo()
-list_PolicyUnits = destinationInfoObj.traverseDestInfoGraph(destinationGraph,totalPolicies,subnetList)
+list_PolicyUnits = destinationInfoObj.traverseDestInfoGraph(destinationGraph,totalPolicyUnits,subnetList)
 print(len(list_PolicyUnits),"total policy units")
 policies = []
 sourceGraph = [(17,50),(100,100)]

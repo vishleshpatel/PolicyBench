@@ -1,15 +1,17 @@
 __author__ = 'vishlesh'
 
+import sys
+sys.path.append('/home/vishlesh/SDN_RuleSetGenerator')
 from SDN_RuleSetGenerator.Measurement.MeasurementPolicies import *
 from SDN_RuleSetGenerator.Policy import *
 from SDN_RuleSetGenerator.Reachability.TraverseSourceInfoGraph import *
 from SDN_RuleSetGenerator.Reachability.TraverseDestInfoGraph import *
 import ipaddress
 
+
 class Overlap():
     def __init__(self):
        self.list_match_count = []
-
 
     def getOverlappedPolicies(self,listReachablityPolicies,listMeasurementPolicies):
 
@@ -39,12 +41,12 @@ class Overlap():
                             string= str(each_measure_policy.getSource()) + str(', '+str(each_measure_policy.getDest())) \
                                              + str(', '+str(each_measure_policy.getAction())+'\n')
                             print(string)
-                            file_measurementPolicies.write(string)
+                            file_measurementPolicies.write(string)  ## writing into file
 
                             string= str(each_forward_policy.getSource()) + str(', '+str(each_forward_policy.getDest())) \
                                              + str(', '+str(each_forward_policy.getAction())+'\n')
                             print(string)
-                            file_reachablityPolicies.write(string)
+                            file_reachablityPolicies.write(string) ##writing into file
                             if len(self.list_match_count)==iteration:
                                 self.list_match_count.append(1)
                             else:
