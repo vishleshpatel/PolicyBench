@@ -1,12 +1,12 @@
 __author__ = 'vishlesh'
+
 #!/usr/bin/env python3
 import sys
 sys.path.append('/home/vishlesh/SDN_RuleSetGenerator')
-from SDN_RuleSetGenerator.Measurement.MeasurementPolicies import *
-from SDN_RuleSetGenerator.Reachability import *
+
 from SDN_RuleSetGenerator.subnet import *
 from SDN_RuleSetGenerator.Reachability.TraverseSourceInfoGraph import *
-from SDN_RuleSetGenerator.count_Overlaps import *
+
 import argparse
 
 def main():
@@ -15,18 +15,17 @@ def main():
     parser.add_argument("--policyType","-t",default = "light",
                         help = "To create policy light network, argument: 'light' " + '\n' +
                                "To create policy heavy network, argument: 'heavy' ")
-    parser.add_argument("--measurePolicies", "-c", default= "40",
-                        help="enter no. of measurement policies to create")
 
     args = parser.parse_args()
 
     print("hosts:",args.hosts)
     print("policy type:",args.policyType)
-
+    file_reachablityPolicies = open('ReachabilityPolicies.txt','w').close()
+    file_reachablityPolicies = open('ReachabilityPolicies.txt','w')
 
     s = Subnet()
     subnetList = s.createSubnets(int(args.hosts))
-    print("total no. of subnets created:",len(subnetList))
+    print("total no. of subnets created in the network:",len(subnetList))
     totalPolicyUnits = 0
     if args.policyType == "light":
         destinationGraph = [(60,50),(100,100)]
@@ -45,28 +44,15 @@ def main():
     list_PolicyUnits = destinationInfoObj.traverseDestInfoGraph(destinationGraph,totalPolicyUnits,subnetList)
     print("total policy units: ",len(list_PolicyUnits))
     fwd_policies = []
-    fwdPolicies=sourceInfoObj.traverseSourceInfoGraph(sourceGraph,list_PolicyUnits,subnetList)
-    print(len(fwdPolicies),"total no. of end point reachability policies")
+    fwd_policies=sourceInfoObj.traverseSourceInfoGraph(sourceGraph,list_PolicyUnits,subnetList)
+    print("total no. of end point reachability policies: ",len(fwd_policies))
     print("set of destinations: ",destinationInfoObj.set_selectedDestIPs)
 
-    print("measurement policy part")
-    m = MeasurementPolicies()
-    listMeasurePolicies = []
-    noMeasurePolicies = int(args.measurePolicies)
-    measurePolicies = m.generateMeasurementPolicies(subnetList,destinationInfoObj.set_selectedDestIPs,noMeasurePolicies)
-    for each_policy in measurePolicies:
-        assert isinstance(each_policy,Policy)
-        print(each_policy.getSource(),"source",each_policy.getDest(),"destination",each_policy.getAction(),"action")
-    print(len(measurePolicies),"finally finished")
-
-    o = Overlap()
-    list_match_count = o.getOverlappedPolicies(fwdPolicies,measurePolicies)
-    print(list_match_count,"list of match count")
-    print(len(list_match_count))
-    count = 0
-    for each_element in list_match_count:
-        count=count+each_element
-    print(count,"total count")
+    for each_forward_policy in fwd_policies:
+          string= str(each_forward_policy.getSource()) + str(', '+str(each_forward_policy.getDest())) \
+                                             + str(', '+str(each_forward_policy.getAction())+'\n')
+          print(string)
+          file_reachablityPolicies.write(string) ##writing into file
 
 
 if __name__ == '__main__':

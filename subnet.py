@@ -58,9 +58,8 @@ class Subnet:
         list.append(self.getList(networkIP,8))  #254
 
         combination = self.getRandomCombination(totalHosts)
-        #print(combination)
         combination = sorted(combination.items())
-        print("here is the combinations in a shorted manner:",combination)
+        #print("here is the combinations in a shorted manner:",combination)
 
         list_keys = []
         list_values = []
