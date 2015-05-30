@@ -54,6 +54,7 @@ def main():
           print(string)
           file_reachablityPolicies.write(string) ##writing into file
 
+    print("total no. of end point reachability policies: ",len(fwd_policies))
 
 if __name__ == '__main__':
     main()

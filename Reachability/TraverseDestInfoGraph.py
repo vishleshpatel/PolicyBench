@@ -71,8 +71,12 @@ class DestInfo:
             # get all subnets
             for each_router in accessPointsInCurrentPolicyUnit:
                 list_subnetAddr.extend(each_router)
+            if len(list_subnetAddr)>20:
+                list_destAddresses = random.sample(list_subnetAddr,20)
+            else:
+                list_destAddresses = list_subnetAddr
             p = Policy()
-            p.setDest(list_subnetAddr)
+            p.setDest(list_destAddresses)
             a = Action(1)   # action type: forward
             p.setAction(a)
             policyUnits.append(p)
@@ -81,7 +85,7 @@ class DestInfo:
             subSet_destIPs = set([])
             ### add each subnet address in  accessPointsInCurrentPolicyUnit,
             ### add that subnet address into set_selectedDestIps
-            self.set_selectedDestIPs.update(set(list_subnetAddr))
+            self.set_selectedDestIPs.update(set(list_destAddresses))
             #subSet_destIPs = list(sublist_destIPs)
             #self.set_selectedDestIPs.update(subSet_destIPs)
 
