@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SDN_RuleSetGenerator.iml" filepath="$PROJECT_DIR$/.idea/SDN_RuleSetGenerator.iml" />
-      <module fileurl="file://$USER_HOME$/github_clones/pyretic/.idea/pyretic.iml" filepath="$USER_HOME$/github_clones/pyretic/.idea/pyretic.iml" />
-    </modules>
-  </component>
-</project>
