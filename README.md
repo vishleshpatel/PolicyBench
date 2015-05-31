@@ -20,7 +20,7 @@ For the simulations purpose in most  research works, Conventional ClassBench is 
 
 ##Introduction
 
-SDN RuleSetGenerator tool is divided into 2 separate tools: PolicyGenerator and RuleGenerator. From the characteristics of modern enterprise networks, PolicyGenerator generates variety of complex policies such as reachability, measurement and security policies. RuleGenerator uses Pyretic run-time to compile these policies and composes OpenFlow rules on the Switch. 
+SDN RuleSetGenerator tool is divided into 2 separate tools: PolicyGenerator and RuleGenerator. From the characteristics of modern enterprise networks, PolicyGenerator generates variety of complex policies such as reachability, measurement and security policies. RuleGenerator uses Pyretic run-time engine[http://frenetic-lang.org/pyretic/] to compile these policies and composes OpenFlow rules on the Switch. 
 By utilizing pyretic's parallel and sequential compolsition, RuleGenerator can generate wildcard rules, add additional matching fields (e.g., MPLS label), rules with action chaining and install them on OpenFlow switches.  
 
 **PolicyGenerator** module has three python scripts that can be executed on command line to generate policies: 
