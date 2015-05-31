@@ -1,7 +1,10 @@
 # SDN_RuleSetGenerator
-Objective: Generate set of SDN rules that reflects current policies of Modern enterprise networks and data center networks.
 
-Introduction:
+## Objective:
+Generate set of OpenFlow rules that reflects current policies of Modern enterprise networks and data center networks.
+
+## Introduction:
+
 
 Installation:
 
