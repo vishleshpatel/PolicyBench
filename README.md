@@ -27,8 +27,7 @@ PolicyGenerator module has three python scripts that can be executed on command 
 - generate_OverlapPolicies - It generates overlapped reachibility and measurement policies. 
 
 In pyretic submodule, 3 pyretic applications that generates OpenFlow rules and installs the rules via pyretic run-time engine.
-- OverlappingPoliciesToRules - 
-- 
+- OverlappingPoliciesToRules 
 
 ##Installation
 
