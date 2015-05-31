@@ -26,9 +26,9 @@ By utilizing pyretic's parallel and sequential compolsition, RuleGenerator can g
 **PolicyGenerator** module has three python scripts that can be executed on command line to generate policies: 
 - generateReachabilityPolicies - It generates reachability policies for each host in the network. Each host belongs to 1 reachability policy unit in the network. 
 - generateMeasurementPolicies - By executing this script, one can generate measurement policies.
-- generate_OverlapPolicies - It generates overlapped reachibility and measurement policies. 
+- generateOverlappedPolicies - It generates overlapped reachibility and measurement policies. 
 
-**RuleGenerator** tool resides in pyretic subfolder, **3 pyretic applications** (OverlappingPoliciesToRules, fwdingToRules and measurementPoliciesToRules) composes SDN policies created by policy generator on OpenvSwitch in mininet via pyretic run-time engine.
+**RuleGenerator** tool resides in pyretic subfolder, **3 pyretic applications** (OverlappingPoliciesToRules, reachabilityPoliciesToRules and measurementPoliciesToRules) composes SDN policies created by policy generator on OpenvSwitch in mininet via pyretic run-time engine.
 
 ##Installation
 
@@ -41,11 +41,14 @@ To install and run the tool, you need to have linux machine. To install, fork an
 
 To generate rules, first you need to use policy generator to create policies and then you this output as input for the rule generator pyretic application.
 
-To generate policy, run one of the policy generator tool like this:
+To generate overlapped reachability and measurement policies, run overlapping policy generator tool like this:
 
-    username@ubuntu:~/SDN_RuleSetGenerator$python3 ./SDN_PolicyGenerator/Reachability/generateReachabilityPolicies.py 
+    username@ubuntu:~/SDN_RuleSetGenerator$ python3 ./SDN_PolicyGenerator/generateOverlappedPolicies.py 
     
-the command assumes your current directiry is SDN_RuleSetGenerator. This command will will write the reachablity policies into the ReachabilityPolicies.txt file in the current directory.
+the command assumes your current directiry is SDN_RuleSetGenerator. This command will will write both reachablity policies and measurement policies into the overlappedReachabilityPolicies.txt and overlappedMeasurementPolicies.txt file in the current directory.
+
+Once, these 2 .txt files generated, it will used to generate rules.
+
 
 
 
