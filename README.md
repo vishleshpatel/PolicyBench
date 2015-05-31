@@ -28,7 +28,7 @@ PolicyGenerator module has three python scripts that can be executed on command 
 - generateMeasurementPolicies - By executing this script, one can generate measurement policies.
 - generate_OverlapPolicies - It generates overlapped reachibility and measurement policies. 
 
-RuleGenerator modules resides in pyretic subfolder, 3 pyretic applications (OverlappingPoliciesToRules, fwdingToRules and measurementPoliciesToRules) composes SDN policies created by policy generator on OpenvSwitch in mininet via pyretic run-time engine.
+RuleGenerator tool resides in pyretic subfolder, 3 pyretic applications (OverlappingPoliciesToRules, fwdingToRules and measurementPoliciesToRules) composes SDN policies created by policy generator on OpenvSwitch in mininet via pyretic run-time engine.
 
 ##Installation
 
