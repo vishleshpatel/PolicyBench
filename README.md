@@ -21,16 +21,21 @@ For the simulations purpose in most  research works, Conventional ClassBench is 
 
 SDN RuleSetGenerator tool is divided into 2 separate tools: PolicyGenerator and RuleGenerator. From the characteristics of modern enterprise networks, PolicyGenerator generates variety of complex policies such as reachability, measurement and security policies. RuleGenerator uses Pyretic run-time to compile these policies and composes OpenFlow rules on the Switch.
 
-PolicyGenerator module has three command line python scripts: generateReachabilityPolicies, generate
+PolicyGenerator module has three python scripts that can be executed on command line to generate policies: 
+- generateReachabilityPolicies - It generates reachability policies for each host in the network. Each host belongs to 1 reachability policy unit in the network. 
+- generateMeasurementPolicies - By executing this script, one can generate measurement policies.
+- generate_OverlapPolicies - It generates overlapped reachibility and measurement policies. 
+
+In pyretic submodule, 3 pyretic applications that generates OpenFlow rules and installs the rules via pyretic run-time engine.
+- OverlappingPoliciesToRules - 
 ##Installation
 
 To install and run the tool, you need to have linux machine. 
-
 First, fork and clone the repository in your machine through:
 
     wget https://github.com/vishleshpatel/SDN_RuleSetGenerator
     
-
+To 
 ##User-guide
 
 
