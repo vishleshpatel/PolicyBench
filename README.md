@@ -65,5 +65,6 @@ you may also need to set path variables first before using rule generator pyreti
 ##References
 1. Theophilus Benson, Aditya Akella and David A. Maltz - "Mining Policies From Enterprise Network Configuration"
 2. David E. Taylor, Jonathan S. Turner - "ClassBench: A Packet Classification Benchmark"
-
+3. Christopher Monsanto, Joshua Reich, Nate Foster, Jennifer Rexford, David Walker - "Composing Software-Defined Networks"
+4. http://frenetic-lang.org/pyretic/
 
