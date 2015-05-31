@@ -32,15 +32,13 @@ RuleGenerator tool resides in pyretic subfolder, 3 pyretic applications (Overlap
 
 ##Installation
 
-To install and run the tool, you need to have linux machine. 
-First, fork and clone the repository in your machine through:
+To install and run the tool, you need to have linux machine. First, fork and clone the repository in your machine through:
 
     wget https://github.com/vishleshpatel/SDN_RuleSetGenerator
     
-To 
 ##User-guide
 
-
+Using t
 ##Commands
 
 ##References
