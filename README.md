@@ -32,7 +32,7 @@ By utilizing pyretic's parallel and sequential compolsition, RuleGenerator can g
 
 ##Installation
 
-To install and run the tool, you need to have linux machine. To install, fork and clone the repository in your machine through:
+To install and run the tool, you need to have linux machine. Next, Fork and clone the repository in your machine through:
 
     wget https://github.com/vishleshpatel/SDN_RuleSetGenerator
     
