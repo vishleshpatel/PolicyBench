@@ -8,7 +8,11 @@ PolicyBench: A SDN Data Plane Policy Generator
 
 
 ## Introduction
-Generate set of OpenFlow rules that reflects current policies of Modern enterprise networks and data center networks.
+
+Simulating the data plane policy semantic of SDN with different network management applications. We present the PolicyBench tool for:
+1. benchmarking SDN flow table management schemes,
+2. generating policy workloads for research on SDN policy enforcements, 
+3. analyzing the semantic characteristic of SDN data plane policies.
 
 Enterprise networks are governed by network policies[1]. Network operators compose these policies through rules. Modern enterprise networks and data center networks are evolving and they impose a variety of constraints on point-to-point network communication[1]. In addition, due to increasing use of Network functions e.g., Distributed firewalls, Load balancer, Intrusion prevention system (IPS) in modern network, these polcies are being enormously complex. They may need rules with chaining in actions (e.g. load balance -> firewall -> IPS), wildcard rules, additional matching fields (e.g., MPLS labels).
 
