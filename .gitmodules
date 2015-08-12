@@ -1,3 +1,6 @@
+[submodule "PolicyGenerator"]
+	path = PolicyGenerator
+	url = https://github.com/vishleshpatel/PolicyGenerator
 [submodule "pyretic"]
 	path = pyretic
 	url = https://github.com/vishleshpatel/pyretic.git
