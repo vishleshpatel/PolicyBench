@@ -1,6 +1,3 @@
-[submodule "SDN_PolicyGenerator"]
-	path = PolicyGenerator
-	url = https://github.com/vishleshpatel/SDN_PolicyGenerator
 [submodule "pyretic"]
 	path = pyretic
 	url = https://github.com/vishleshpatel/pyretic.git
