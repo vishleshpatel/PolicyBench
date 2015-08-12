@@ -29,7 +29,7 @@ Our project is motivated by ClassBench - a packet classification benchmark. Conv
 
 To install and run the tool, you need to have linux machine. Next, Fork and clone the repository in your machine through:
 
-    wget https://github.com/vishleshpatel/SDN_RuleSetGenerator
+    wget https://github.com/vishleshpatel/PolicyBench
     
     
 ##User-guide
