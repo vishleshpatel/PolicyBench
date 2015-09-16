@@ -9,7 +9,7 @@ PolicyBench: A SDN Data Plane Policy Generator
 
 ## Introduction
 
-PolicyBench Simulates the data plane policy semantic of SDN with different network management applications. PolicyBench can be used for following purposes:
+PolicyBench simulates the data plane policy semantic of SDN with different network management applications. PolicyBench can be used for following purposes:
 
 1. benchmarking SDN flow table management schemes,
 
