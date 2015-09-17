@@ -64,8 +64,8 @@
       <file leaf-file-name="BinaryTree.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PolicyGenerator/Measurement/BinaryTree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.0127795" vertical-offset="1624" max-vertical-offset="3600">
-              <caret line="234" column="0" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.90415335" vertical-offset="1834" max-vertical-offset="3615">
+              <caret line="160" column="56" selection-start-line="160" selection-start-column="56" selection-end-line="160" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -532,7 +532,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442467612897</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="changes">
+      <created>1442467817408</created>
+      <option name="number" value="00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1442467817408</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -792,8 +798,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PolicyGenerator/Measurement/BinaryTree.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.0127795" vertical-offset="1624" max-vertical-offset="3600">
-          <caret line="234" column="0" selection-start-line="234" selection-start-column="0" selection-end-line="234" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.90415335" vertical-offset="1834" max-vertical-offset="3615">
+          <caret line="160" column="56" selection-start-line="160" selection-start-column="56" selection-end-line="160" selection-end-column="56" />
           <folding />
         </state>
       </provider>
