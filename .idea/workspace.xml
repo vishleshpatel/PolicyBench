@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="042454ce-e8ab-4a0f-9c59-b4a8340e8a28" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolicyGenerator" afterPath="$PROJECT_DIR$/PolicyGenerator" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolicyGenerator/Reachability/TraverseDestInfoGraph.py" afterPath="$PROJECT_DIR$/PolicyGenerator/Reachability/TraverseDestInfoGraph.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolicyGenerator/generateOverlappedPolicies.py" afterPath="$PROJECT_DIR$/PolicyGenerator/generateOverlappedPolicies.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PolicyGenerator/Reachability/TraverseSourceInfoGraph.py" afterPath="$PROJECT_DIR$/PolicyGenerator/Reachability/TraverseSourceInfoGraph.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PolicyBench.iws" />
@@ -51,11 +49,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TraverseDestInfoGraph.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TraverseDestInfoGraph.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PolicyGenerator/Reachability/TraverseDestInfoGraph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.06326034" vertical-offset="4" max-vertical-offset="1890">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4" max-vertical-offset="1890">
               <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TraverseSourceInfoGraph.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/PolicyGenerator/Reachability/TraverseSourceInfoGraph.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.10948905" vertical-offset="0" max-vertical-offset="2115">
+              <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -116,6 +124,7 @@
         <option value="$PROJECT_DIR$/PolicyGenerator/generateOverlappedPolicies.py" />
         <option value="$PROJECT_DIR$/PolicyGenerator/Reachability/generateReachabilityPolicies.py" />
         <option value="$PROJECT_DIR$/PolicyGenerator/Reachability/TraverseDestInfoGraph.py" />
+        <option value="$PROJECT_DIR$/PolicyGenerator/Reachability/TraverseSourceInfoGraph.py" />
       </list>
     </option>
   </component>
@@ -465,7 +474,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442438863523</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="changes">
+      <created>1442466708853</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1442466708853</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -688,8 +703,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PolicyGenerator/Reachability/TraverseDestInfoGraph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06326034" vertical-offset="4" max-vertical-offset="1890">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4" max-vertical-offset="1890">
           <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PolicyGenerator/Reachability/TraverseSourceInfoGraph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10948905" vertical-offset="0" max-vertical-offset="2115">
+          <caret line="3" column="5" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="5" />
           <folding />
         </state>
       </provider>
