@@ -38,7 +38,7 @@ To generate rules, first you need to use policy generator to create policies and
 
 To generate overlapped reachability and measurement policies, run overlapping policy generator tool like this:
 
-    username@ubuntu$ python3 ./PolicyGenerator/generateOverlappedPolicies.py 
+    username@ubuntu$ python ./PolicyGenerator/generateOverlappedPolicies.py 
     
 This command will write both reachablity policies and measurement policies into the overlappedReachabilityPolicies.txt and overlappedMeasurementPolicies.txt file in the current directory.
 
