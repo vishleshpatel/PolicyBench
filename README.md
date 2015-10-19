@@ -34,26 +34,26 @@ To install and run the tool, you need to have linux machine. Next, Fork and clon
     
 ##User-guide
 
-To generate rules, first you need to use policy generator to create policies and then you this output as input for the rule generator pyretic application.
+To generate rules, first you need to use policy generator to create policies and then use this output as input for the rule generator application.
 
 To generate overlapped reachability and measurement policies, run overlapping policy generator tool like this:
 
-    username@ubuntu:~/SDN_RuleSetGenerator$ python3 ./SDN_PolicyGenerator/generateOverlappedPolicies.py 
+    username@ubuntu$ python3 ./PolicyGenerator/generateOverlappedPolicies.py 
     
-the command assumes your current directiry is SDN_RuleSetGenerator. This command will will write both reachablity policies and measurement policies into the overlappedReachabilityPolicies.txt and overlappedMeasurementPolicies.txt file in the current directory.
+This command will write both reachablity policies and measurement policies into the overlappedReachabilityPolicies.txt and overlappedMeasurementPolicies.txt file in the current directory.
 
-Once, these 2 .txt files generated, it will used to generate rules. Rules can be generated using OverlappingPoliciesToRules.py. Command for this is as follows:
+Once, these 2 policy files generated, it will be used to generate rules. Rules can be generated using OverlappingPoliciesToRules.py. Command for this is as follows:
 
-    username@ubuntu:~/SDN_RuleSetGenerator/pyretic$ ./pyretic.py -m p0 pyretic.modules.OverlappingPoliciesToRules
+    username@ubuntu$ ./pyretic.py -m p0 pyretic.modules.OverlappingPoliciesToRules
 
-the command assumes your current directory is /home/username/SDN_RuleSetGenerator/pyretic. 
+the command assumes your current directory is /home/username/PolicyBench/pyretic. 
 
 Note: Policy generator scripts imports another module's class method to perform several actions. So, you need to modify the system path append line (**sys.path.append**) in generateOverlappedPolicies.py as per the path of SDN_RuleSetGenerator folder in your machine.
 
 you may also need to set path variables first before using rule generator pyretic application like this:
 
     export PATH=$PATH:/home/yourusername/pox
-    export PYTHONPATH=/home/yourusername/pox:/home/yourusername/SDN_RuleSetGenerator/pyretic
+    export PYTHONPATH=/home/yourusername/pox:/home/yourusername/PolicyBench/pyretic
 
 ##Commands
 
